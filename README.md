@@ -1,4 +1,4 @@
-# Skip Hire Booking Website Redesign
+# Website Redesign
 
 ## Project Overview
 
@@ -205,7 +205,7 @@ const { data: skipOptions, error, isLoading } = useSWR('/api/skips', fetcher)
 
 The application has been tested across multiple browsers and devices to ensure consistent behavior:
 
-- Chrome, Firefox, Safari, Edge
+- Chrome, Safari
 - Desktop, tablet, and mobile viewports
 - Light and dark mode configurations
 - Various network conditions (slow 3G, offline, etc.)
