@@ -6,7 +6,7 @@ This project is a redesign of a skip hire booking website, focusing on improving
 
 ![Skip Hire Booking Website](/public/image-2.png)
 ![Skip Hire Booking Website](/public/image-1.png)
-[iPhone-13-PRO-localhost-shywglbsu52211.webm](https://github.com/user-attachments/assets/db0651ae-3956-4999-820e-c7c5ed1e46ca)
+![iPhone-13-PRO-localhost-shywglbsu52211.webm](https://github.com/user-attachments/assets/db0651ae-3956-4999-820e-c7c5ed1e46ca)
 
 ## 🚀 Key Improvements
 ### UI/UX Enhancements
