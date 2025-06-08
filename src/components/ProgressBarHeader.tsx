@@ -63,8 +63,8 @@ export function ProgressBarHeader() {
     },
   ]
   return (
-    <div className='sticky top-0 z-30 bg-white/95 dark:bg-gray-900/95 shadow-sm border-b border-gray-200 dark:border-gray-700 backdrop-blur-sm'>
-      <div className='max-w-6xl mx-auto py-6'>
+    <div className='sticky top-0 z-30 bg-white/95 dark:bg-gray-900/95 shadow-sm border-b border-gray-200 dark:border-gray-700 backdrop-blur-sm p-6'>
+      <div className='max-w-6xl mx-auto'>
         <div className='flex items-center'>
           <div className='flex items-center w-full justify-center'>
             {progressSteps.map(
@@ -90,7 +90,7 @@ export function ProgressBarHeader() {
                     >
                       {icon}
                     </div>
-                    <span className='hidden sm:block font-medium text-sm'>
+                    <span className='hidden sm:block font-medium text-sm md:text-md lg:text-lg'>
                       {name}
                     </span>
                   </div>

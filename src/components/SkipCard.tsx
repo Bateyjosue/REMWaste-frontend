@@ -1,4 +1,4 @@
-import wasteImage from '../../public/waste.jpg'
+import wasteImage from '/waste.jpg'
 import type { WasteData } from '../lib/api/useGetWaste'
 export interface Step {
   id: number

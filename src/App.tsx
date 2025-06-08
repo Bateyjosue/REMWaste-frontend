@@ -25,7 +25,7 @@ function App() {
       {isLoading && <Skeleton />}
 
       {!isLoading && (
-        <div className='max-w-6xl mx-auto'>
+        <div className='max-w-6xl mx-auto p-8 lg:p-8 lg:p-0'>
           <div className='text-center mb-8'>
             <h1 className='text-3xl font-bold text-slate-900 dark:text-slate-100 sm:text-4xl'>
               Choose Your Skip Size
@@ -48,7 +48,7 @@ function App() {
             <div className='flex justify-center mb-8'>
               <button
                 onClick={deselectSkip}
-                className='bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50 px-6 py-3 rounded-lg font-medium'
+                className='bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50 px-6 py-4 rounded-lg font-medium'
               >
                 Unselect {selectedSkipData?.size} Skip
               </button>
@@ -58,7 +58,7 @@ function App() {
             <div className='fixed bottom-6 left-0 right-0 flex justify-center z-30'>
               <button
                 onClick={openModal}
-                className='bg-blue-600 hover:bg-blue-700 text-white shadow-lg px-6 py-6 rounded-lg'
+                className='bg-blue-600 hover:bg-blue-700 text-white shadow-lg px-6 py-4 rounded-lg'
               >
                 View Selected Skip: {selectedSkipData.size} - £
                 {selectedSkipData.price_before_vat}

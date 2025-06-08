@@ -29,6 +29,7 @@ export function Modal({ selectedSkip, onClose, isVisible }: ModalProps) {
 
   if (!selectedSkip || !isVisible) return null
 
+  
   return (
     <>
       <div
@@ -97,6 +98,29 @@ export function Modal({ selectedSkip, onClose, isVisible }: ModalProps) {
                 </div>
               </div>
             </div>
+          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 mb-4">
+            <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Price Breakdown</h4>
+            <div className="space-y-2 text-sm">
+              <div className="flex justify-between">
+              <span className="text-gray-700 dark:text-gray-300">Skip hire (14 days)</span>
+              <span className="text-gray-900 dark:text-white">£{selectedSkip.price_before_vat}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-700 dark:text-gray-300">Delivery & Collection</span>
+                  <span className="text-green-600 dark:text-green-400">
+                    {
+                      calculateDelivery(selectedSkip.transport_cost, selectedSkip.per_tonne_cost)
+                    }
+                </span>
+              </div>
+              <div className="border-t border-blue-200 dark:border-blue-700 pt-2 mt-2">
+                <div className="flex justify-between font-bold">
+                  <span className="text-gray-900 dark:text-white">Total (inc. VAT)</span>
+                  <span className="text-blue-600 dark:text-blue-400">£{selectedSkip.price_before_vat - calculateVAT(selectedSkip.price_before_vat)}</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
             <div className='md:flex md:flex-row md:items-center md:justify-between space-y-2  flex flex-col md:space-x-4'>
               <button
@@ -118,4 +142,16 @@ export function Modal({ selectedSkip, onClose, isVisible }: ModalProps) {
       </div>
     </>
   )
+}
+
+
+function calculateVAT(price: number): number {
+  const vatRate = 0.2 // 20% VAT
+  return parseFloat((price * vatRate).toFixed(2))
+}
+
+// function to calculate delevery on transport_cost and per_tone_cost
+function calculateDelivery(transportCost: number | null, perTonneCost: number | null): number | string {
+  if (!transportCost || !perTonneCost) return 'Free'
+  return '£' + transportCost * perTonneCost
 }
