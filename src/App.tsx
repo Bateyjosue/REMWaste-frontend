@@ -17,8 +17,9 @@ function App() {
     deselectSkip,
   } = useSkipSelection()
 
-  const { data, isLoading } = useGetWaste()
+  const { data, isLoading, error } = useGetWaste()
   const selectedSkipData = getSelectedSkip(data)
+
   return (
     <div className='min-h-screen bg-slate-50 dark:bg-slate-900'>
       <ProgressBarHeader />
@@ -43,7 +44,22 @@ function App() {
                 onSelect={selectSkip}
               />
             ))}
+
           </div>
+          {
+            error && (
+              <div className='max-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center'>
+                <div className='text-center'>
+                  <h1 className='text-2xl font-bold text-red-600 dark:text-red-400'>
+                    Error Loading Skips
+                  </h1>
+                  <p className='mt-2 text-slate-600 dark:text-slate-300'>
+                    Please try again later.
+                  </p>
+                </div>
+              </div>
+            )
+          }
           {selectedSkip && (
             <div className='flex justify-center mb-8'>
               <button
