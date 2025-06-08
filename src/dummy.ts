@@ -1,0 +1,66 @@
+export const skipOptions = [
+  {
+    id: '4-yard',
+    size: '4 Yards',
+    price: 211,
+    period: '14 day hire period',
+
+    popular: false,
+    available: true,
+    description: 'Perfect for small home projects and garden clearance',
+  },
+  {
+    id: '5-yard',
+    size: '5 Yards',
+    price: 241,
+    period: '14 day hire period',
+    popular: false,
+    available: true,
+    description: 'Ideal for kitchen or bathroom renovations',
+  },
+  {
+    id: '6-yard',
+    size: '6 Yards',
+    price: 264,
+    period: '14 day hire period',
+    popular: true,
+    available: true,
+    description: 'Most popular choice for medium home projects',
+  },
+  {
+    id: '8-yard',
+    size: '8 Yards',
+    price: 295,
+    period: '14 day hire period',
+    popular: false,
+    available: true,
+    description: 'Great for larger renovation projects',
+  },
+  {
+    id: '10-yard',
+    size: '10 Yards',
+    price: 325,
+    period: '14 day hire period',
+    popular: false,
+    available: false,
+    description: 'Perfect for major home renovations',
+  },
+  {
+    id: '12-yard',
+    size: '12 Yards',
+    price: 355,
+    period: '14 day hire period',
+    popular: false,
+    available: false,
+    description: 'Ideal for large construction projects',
+  },
+]
+
+export const steps = [
+  { id: 1, name: 'Postcode', icon: '📍', completed: true },
+  { id: 2, name: 'Waste Type', icon: '🗑️', completed: true },
+  { id: 3, name: 'Select Skip', icon: '✅', current: true, completed: false },
+  { id: 4, name: 'Permit Check', icon: '🛡️', completed: false },
+  { id: 5, name: 'Choose Date', icon: '📅', completed: false },
+  { id: 6, name: 'Payment', icon: '💳', completed: false },
+]
