@@ -62,10 +62,10 @@ export function Modal({ selectedSkip, onClose, isVisible }: ModalProps) {
             <div className='mb-6'>
               <div className='flex items-center justify-between mb-3'>
                 <div>
-                  <h3 className='text-xl font-bold text-slate-900 dark:text-slate-100'>
+                  <h3 className='text-2xl font-bold text-slate-900 dark:text-slate-100'>
                     Selected Skip
                   </h3>
-                  <p className='text-sm text-slate-600 dark:text-slate-400'>
+                  <p className='text-lg text-slate-600 dark:text-slate-400'>
                     Ready to continue with your booking
                   </p>
                 </div>
@@ -78,7 +78,7 @@ export function Modal({ selectedSkip, onClose, isVisible }: ModalProps) {
                       <img src={wasteImage} alt='' />
                     </div>
                     <div>
-                      <h4 className='font-semibold text-slate-900 dark:text-slate-100'>
+                      <h4 className='font-semibold text-slate-900 dark:text-slate-100 '>
                         {selectedSkip.size} Skip
                       </h4>
                       <p className='text-sm text-slate-600 dark:text-slate-400'>
@@ -100,7 +100,7 @@ export function Modal({ selectedSkip, onClose, isVisible }: ModalProps) {
             </div>
           <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 mb-4">
             <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Price Breakdown</h4>
-            <div className="space-y-2 text-sm">
+            <div className="space-y-2 text-lg">
               <div className="flex justify-between">
               <span className="text-gray-700 dark:text-gray-300">Skip hire (14 days)</span>
               <span className="text-gray-900 dark:text-white">£{selectedSkip.price_before_vat}</span>

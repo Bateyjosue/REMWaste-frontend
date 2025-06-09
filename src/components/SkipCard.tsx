@@ -50,14 +50,14 @@ export function SkipCard({ skip, isSelected, onSelect }: SkipCardProps) {
             alt={`${skip.size} skip`}
             className='w-full h-48 object-cover rounded-t-lg'
           />
-          <div className='absolute top-3 right-3 bg-blue-600 text-white px-2 py-1 rounded text-sm font-medium'>
+          <div className='absolute top-3 right-3 bg-blue-600 text-white px-2 py-1 rounded text-md font-medium'>
             {skip.size} Yards
           </div>
         </div>
 
         <div className='p-6'>
           <div className='flex items-center justify-between mb-2'>
-            <h3 className='text-xl font-semibold text-slate-900 dark:text-slate-100'>
+            <h3 className='text-2xl font-semibold text-slate-900 dark:text-slate-100'>
               {skip.size} Skip
             </h3>
             <div className='text-right'>
@@ -67,12 +67,12 @@ export function SkipCard({ skip, isSelected, onSelect }: SkipCardProps) {
             </div>
           </div>
 
-          <p className='text-sm text-slate-600 dark:text-slate-400 mb-2'>
+          <p className='text-lg text-slate-600 dark:text-slate-400 mb-2'>
             {skip.hire_period_days > 1
               ? `${skip.hire_period_days} days hire period`
               : `${skip.hire_period_days} day hire period`}
           </p>
-          <p className='text-sm text-slate-700 dark:text-slate-300 mb-4'>
+          <p className='text-md text-slate-700 dark:text-slate-300 mb-4'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur,
             explicabo?
           </p>
