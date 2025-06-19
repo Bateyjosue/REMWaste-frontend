@@ -1,6 +1,7 @@
 import useSWR from 'swr'
 import { ProblemError } from './ProblemError'
 import { fetcher } from './fetcher'
+
 export type WasteData = {
   allowed_on_road: boolean
   allows_heavy_waste: boolean
@@ -17,15 +18,19 @@ export type WasteData = {
   updated_at: string
   vat: number
 }
+
 export function useGetWaste() {
+  const API_URL = 'https://app.wewantwaste.co.uk/api/skips/by-location?postcode=NR32&area=Lowestoft'
+  
   const { data, isLoading, error } = useSWR<WasteData[], ProblemError>(
-    import.meta.env.VITE_WASTE_URL,
+    API_URL,
     fetcher,
     {
       revalidateIfStale: false,
       revalidateOnFocus: false,
     }
   )
+  
   return {
     data,
     isLoading,
