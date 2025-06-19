@@ -15,8 +15,11 @@ async function getProblemErrorFromResponse(res: Response) {
 }
 
 export async function fetcher() {
-  const res = await fetch(`${import.meta.env.VITE_WASTE_URL}`)
+  const API_URL = 'https://app.wewantwaste.co.uk/api/skips/by-location?postcode=NR32&area=Lowestoft'
+  
+  const res = await fetch(API_URL)
   console.log({ res })
+  
   if (!res.ok) {
     throw await getProblemErrorFromResponse(res)
   }
