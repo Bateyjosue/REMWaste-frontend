@@ -7,15 +7,15 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className='fixed bottom-6 right-6 z-50 rounded-full h-12 w-12 shadow-lg flex items-center justify-center  bg-slate-200 dark:bg-slate-600 dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-600'
+      className='fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border border-slate-200 dark:border-slate-700 shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center group hover:scale-110'
     >
-      <span className='text-xl'>
+      <div className='relative'>
         {theme === 'dark' ? (
-          <RiSunLine className='text-slate-200' />
+          <RiSunLine className='w-6 h-6 text-amber-500 transition-transform group-hover:rotate-12' />
         ) : (
-          <RiMoonLine />
+          <RiMoonLine className='w-6 h-6 text-slate-600 transition-transform group-hover:-rotate-12' />
         )}
-      </span>
+      </div>
     </button>
   )
 }

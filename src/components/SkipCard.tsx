@@ -1,104 +1,159 @@
 import wasteImage from '/waste.jpg'
 import type { WasteData } from '../lib/api/useGetWaste'
-export interface Step {
-  id: number
-  name: string
-  icon: string
-  completed: boolean
-  current?: boolean
-}
 
 export interface SkipCardProps {
   skip: WasteData
   isSelected: boolean
   onSelect: (skipId: number) => void
 }
+
 export function SkipCard({ skip, isSelected, onSelect }: SkipCardProps) {
   const handleCardClick = () => {
     if (skip.allowed_on_road) {
       onSelect(skip.id)
-      console.log('Card clicked:', skip.id, 'Selected:', !isSelected)
     }
   }
 
+  const isPopular = skip.size === 6 // Mark 6-yard as popular
+  const isUnavailable = !skip.allowed_on_road
+
   return (
-    <div
-      className={`relative cursor-pointer transition-all duration-300 hover:shadow-lg dark:hover:shadow-slate-700/25 rounded-lg border ${
-        isSelected
-          ? 'ring-2 ring-blue-600 shadow-lg dark:shadow-slate-700/25 border-blue-200 dark:border-blue-700 bg-blue-50 dark:bg-blue-900/20 scale-[1.02]'
-          : 'hover:shadow-md dark:hover:shadow-slate-700/20 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:scale-[1.01]'
-      } ${!skip.allowed_on_road ? 'opacity-60 cursor-not-allowed' : ''}`}
-      onClick={handleCardClick}
-    >
-      {!skip.allowed_on_road && (
-        <div className='absolute inset-0 bg-slate-900/20 dark:bg-slate-900/40 rounded-lg flex items-center justify-center z-10'>
-          <div className='bg-slate-700 text-white px-4 py-2 rounded-full text-sm font-medium'>
-            Not Available On This Road
+    <div className='relative group'>
+      {/* Popular Badge */}
+      {isPopular && (
+        <div className='absolute -top-3 left-1/2 transform -translate-x-1/2 z-20'>
+          <div className='bg-gradient-to-r from-orange-500 to-pink-500 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-lg'>
+            Most Popular
           </div>
         </div>
       )}
-      {isSelected && (
-        <div className='absolute -top-2 -right-2 z-10 bg-blue-600 text-white rounded-full shadow-lg animate-bounce h-6 w-6 flex items-center justify-center'>
-          <span className='text-sm'>✓</span>
-        </div>
-      )}
 
-      <div className='p-0'>
-        <div className='relative'>
+      <div
+        className={`relative cursor-pointer transition-all duration-300 rounded-2xl border-2 overflow-hidden ${
+          isSelected
+            ? 'border-blue-500 shadow-2xl shadow-blue-500/25 dark:shadow-blue-500/20 scale-[1.02] bg-white dark:bg-slate-800'
+            : isUnavailable
+            ? 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 opacity-60'
+            : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-blue-300 dark:hover:border-blue-600 hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-slate-900/50 hover:scale-[1.01]'
+        } ${!isUnavailable ? 'hover:shadow-lg' : 'cursor-not-allowed'}`}
+        onClick={handleCardClick}
+      >
+        {/* Unavailable Overlay */}
+        {isUnavailable && (
+          <div className='absolute inset-0 bg-slate-900/20 dark:bg-slate-900/40 backdrop-blur-sm z-10 flex items-center justify-center'>
+            <div className='bg-slate-800 dark:bg-slate-700 text-white px-6 py-3 rounded-xl font-semibold shadow-lg'>
+              Not Available On This Road
+            </div>
+          </div>
+        )}
+
+        {/* Selection Indicator */}
+        {isSelected && (
+          <div className='absolute top-4 right-4 z-20'>
+            <div className='w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg animate-pulse'>
+              <svg className='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={3} d='M5 13l4 4L19 7' />
+              </svg>
+            </div>
+          </div>
+        )}
+
+        {/* Image Section */}
+        <div className='relative h-48 overflow-hidden'>
           <img
             src={wasteImage}
-            alt={`${skip.size} skip`}
-            className='w-full h-48 object-cover rounded-t-lg'
+            alt={`${skip.size} yard skip`}
+            className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-105'
           />
-          <div className='absolute top-3 right-3 bg-blue-600 text-white px-2 py-1 rounded text-md font-medium'>
-            {skip.size} Yards
+          <div className='absolute inset-0 bg-gradient-to-t from-black/20 to-transparent' />
+          
+          {/* Size Badge */}
+          <div className='absolute bottom-4 left-4'>
+            <div className='bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm px-3 py-2 rounded-xl shadow-lg'>
+              <span className='text-2xl font-bold text-slate-900 dark:text-slate-100'>{skip.size}</span>
+              <span className='text-sm text-slate-600 dark:text-slate-400 ml-1'>Yards</span>
+            </div>
           </div>
         </div>
 
+        {/* Content Section */}
         <div className='p-6'>
-          <div className='flex items-center justify-between mb-2'>
-            <h3 className='text-2xl font-semibold text-slate-900 dark:text-slate-100'>
-              {skip.size} Skip
-            </h3>
+          <div className='flex items-start justify-between mb-4'>
+            <div>
+              <h3 className='text-xl font-bold text-slate-900 dark:text-slate-100 mb-1'>
+                {skip.size} Yard Skip
+              </h3>
+              <p className='text-slate-600 dark:text-slate-400 text-sm'>
+                {skip.hire_period_days} day{skip.hire_period_days > 1 ? 's' : ''} hire period
+              </p>
+            </div>
             <div className='text-right'>
-              <div className='text-2xl font-bold text-blue-600 dark:text-blue-400'>
+              <div className='text-2xl font-bold text-slate-900 dark:text-slate-100'>
                 £{skip.price_before_vat}
+              </div>
+              <div className='text-xs text-slate-500 dark:text-slate-400'>
+                + VAT
               </div>
             </div>
           </div>
 
-          <p className='text-lg text-slate-600 dark:text-slate-400 mb-2'>
-            {skip.hire_period_days > 1
-              ? `${skip.hire_period_days} days hire period`
-              : `${skip.hire_period_days} day hire period`}
-          </p>
-          <p className='text-md text-slate-700 dark:text-slate-300 mb-4'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur,
-            explicabo?
-          </p>
+          {/* Features */}
+          <div className='space-y-2 mb-6'>
+            <div className='flex items-center text-sm text-slate-600 dark:text-slate-400'>
+              <svg className='w-4 h-4 text-green-500 mr-2' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
+              </svg>
+              Free delivery & collection
+            </div>
+            <div className='flex items-center text-sm text-slate-600 dark:text-slate-400'>
+              <svg className='w-4 h-4 text-green-500 mr-2' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
+              </svg>
+              {skip.allows_heavy_waste ? 'Heavy waste allowed' : 'Standard waste only'}
+            </div>
+            <div className='flex items-center text-sm text-slate-600 dark:text-slate-400'>
+              <svg className='w-4 h-4 text-green-500 mr-2' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
+              </svg>
+              Perfect for {getSkipUseCase(skip.size)} projects
+            </div>
+          </div>
 
+          {/* Action Button */}
           <button
             onClick={handleCardClick}
-            className={`w-full py-3 px-4 rounded-lg font-medium transition-all duration-300 ${
+            disabled={isUnavailable}
+            className={`w-full py-4 px-6 rounded-xl font-semibold transition-all duration-200 ${
               isSelected
-                ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-md'
-                : 'bg-blue-600 hover:bg-blue-700 text-white'
-            } ${!skip.allowed_on_road ? 'opacity-50 cursor-not-allowed' : ''}`}
-            disabled={!skip.allowed_on_road}
+                ? 'bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white shadow-lg'
+                : isUnavailable
+                ? 'bg-slate-200 dark:bg-slate-700 text-slate-400 dark:text-slate-500 cursor-not-allowed'
+                : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transform hover:scale-[1.02]'
+            }`}
           >
             {isSelected ? (
               <span className='flex items-center justify-center'>
-                <span className='mr-2'>✓</span>
-                <span className='font-bold'>SELECTED</span> - Click to Unselect
+                <svg className='w-5 h-5 mr-2' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
+                </svg>
+                Selected - Click to Change
               </span>
+            ) : isUnavailable ? (
+              'Not Available'
             ) : (
-              <span className='flex items-center justify-center'>
-                Select This Skip
-              </span>
+              'Select This Skip'
             )}
           </button>
         </div>
       </div>
     </div>
   )
+}
+
+function getSkipUseCase(size: number): string {
+  if (size <= 4) return 'small home clearance'
+  if (size <= 6) return 'bathroom/kitchen renovation'
+  if (size <= 8) return 'medium renovation'
+  if (size <= 10) return 'large home renovation'
+  return 'major construction'
 }
