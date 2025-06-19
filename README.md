@@ -4,7 +4,6 @@
 
 This project is a redesign of a skip hire booking website, focusing on improving user experience, visual design, and code quality. 
 The application allows users to select skip sizes for waste disposal, with features like dark mode, responsive design, API integration, and an interactive selection process.
-
 ## 🚀 Key Improvements
 ### UI/UX Enhancements
 
